@@ -1,13 +1,16 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from db import models
 from db.database import Base, engine
 from contextlib import asynccontextmanager
+from api.v1 import auth as auth_routes
+from exceptions.register import register_exception_handlers
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     print("Application startup...")
     try:
+        from db import models
         Base.metadata.create_all(bind=engine)
         print("Tables created successfully")
     except Exception as e:
@@ -25,6 +28,5 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/")
-def read_root():
-    return {"message": "Hello from FastAPI"}
+register_exception_handlers(app)
+app.include_router(auth_routes.router, prefix="/api/v1/auth", tags=["Auth"])
