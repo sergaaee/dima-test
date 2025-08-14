@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from db.database import Base, engine
 from contextlib import asynccontextmanager
 from api.v1 import auth as auth_routes
+from api.v1 import user as user_routes
 from exceptions.register import register_exception_handlers
 
 
@@ -30,3 +31,4 @@ app.add_middleware(
 
 register_exception_handlers(app)
 app.include_router(auth_routes.router, prefix="/api/v1/auth", tags=["Auth"])
+app.include_router(user_routes.router, prefix="/api/v1/user", tags=["User"])

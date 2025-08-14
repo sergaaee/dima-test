@@ -6,6 +6,7 @@ user_get_config = ConfigDict(
         json_schema_extra={
             "example": {
                 "id": 1,
+                "full_name": "John Doe",
                 "email": "johndoe@example.com",
                 "accounts": [
                     {"id": 1, "balance": 1000, "user_id": 1},
@@ -37,16 +38,19 @@ user_get_config = ConfigDict(
 
 user_login_config = ConfigDict(
         from_attributes=True,
+        arbitrary_types_allowed=True,
         json_schema_extra={
-            "example": {"email": "johndoe", "password": "password123"}
+            "example": {"email": "johndoe@example.com", "full_name": "John Doe", "password": "password123"}
         },
     )
 
 user_create_config = ConfigDict(
         from_attributes=True,
+        arbitrary_types_allowed=True,
         json_schema_extra={
             "example": {
                 "email": "example@mail.com",
+                "full_name": "John Doe",
                 "password": "password123",
             }
         },
