@@ -10,7 +10,7 @@ def get_user_by_email(email: EmailStr, db: Session):
 
 
 def delete_user(email: EmailStr, user: User, db: Session):
-    if user.priveliges_type == "Admin":
+    if user.priveliges_type == "admin":
         db_user = get_user_by_email(email, db)
         if not db_user:
             raise UserNotFoundError()
