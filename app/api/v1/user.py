@@ -26,5 +26,9 @@ def get_me(db: Session = Depends(get_db), current_user: UserLogin = Depends(get_
 
 
 @router.delete("", response_model=dict)
-def delete_me(email: EmailStr, db: Session = Depends(get_db)):
-    return delete_user(email, db)
+def delete_user_by_email(email: EmailStr, db: Session = Depends(get_db), current_user: UserLogin = Depends(get_current_user)):
+    user = get_user_by_email(current_user.email, db)
+    if not user:
+        raise UserNotFoundError()
+
+    return delete_user(email, user, db)

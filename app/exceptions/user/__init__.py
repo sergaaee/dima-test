@@ -1,2 +1,2 @@
-from .errors import UserAlreadyExistsError, UserNotFoundError
+from .errors import UserAlreadyExistsError, UserNotFoundError, PermissionDeniedError
 from .user_handler import register_user_exception_handlers

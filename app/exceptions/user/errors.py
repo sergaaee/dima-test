@@ -13,4 +13,5 @@ class InvalidTokenError(ServiceError):
     pass
 
 class PermissionDeniedError(ServiceError):
-    pass
+    def __init__(self,):
+        super().__init__(f"You do not have permission to perform this action")
